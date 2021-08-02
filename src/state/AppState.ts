@@ -19,6 +19,9 @@ export class AppState {
     const parentId = ''; // root folder parents have no id
     const newRootFolder = new Folder('new', parentId, 'New Folder');
 
+    const parent = this.treeNodes.get(parentId);
+
     this.treeNodes.set(newRootFolder.id, newRootFolder);
+    console.log(this.treeNodes);
   }
 }

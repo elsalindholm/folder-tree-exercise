@@ -8,8 +8,9 @@ export enum NodeType {
 }
 
 export class AppState {
-  public treeRoot = new Folder('', '', '');
+  @observable public treeRoot = new Folder('', '', '');
   @observable public nodeMap = new Map<string, TreeNode>();
+  @observable public selectedNode: TreeNode;
 
   constructor() {
     this.nodeMap.set(this.treeRoot.id, this.treeRoot);
@@ -32,7 +33,7 @@ export class AppState {
   }
 
   @action createRandomId() {
-    let charsForId = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    let charsForId = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let lengthOfId = 6;
     let randomId: string[] = [];
 
@@ -42,5 +43,17 @@ export class AppState {
     }
     console.log(randomId);
     return randomId.join('');
+  }
+
+  @action onNodeSelect(node: TreeNode) {
+    //first deselect previously selected node
+    if (this.selectedNode) {
+      console.log(`old selected ${this.selectedNode.id}`);
+      this.selectedNode.deselect();
+    }
+    //then set the new selected node
+    this.selectedNode = node;
+    this.selectedNode.select();
+    console.log(`new selected ${this.selectedNode.id}`);
   }
 }

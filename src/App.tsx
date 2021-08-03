@@ -16,7 +16,7 @@ export class App extends React.PureComponent {
           <FolderTreeActions createRootFolder={() => this.appState.createRootFolder()} />
         </div>
         <div className={'tree'}>
-          <FolderTree />
+          <FolderTree appState={this.appState} />
         </div>
         <div className={'focus-actions'}></div>
         <div className={'focus'}>

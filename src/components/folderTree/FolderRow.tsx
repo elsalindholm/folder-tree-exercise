@@ -27,7 +27,6 @@ export const FolderRow: React.FC<FolderProps> = observer(({ depth, folder, onSel
       <div className={'folder-chevron'}>V</div>
       <div className={'folder-symbol'}>F</div>
       <div className={'folder-label'}>{folder.label}</div>
-      <div className={'edit-folder-button'}>+</div>
     </div>
   );
 });

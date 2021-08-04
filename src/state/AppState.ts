@@ -45,6 +45,12 @@ export class AppState {
     console.log(this.nodeMap);
   }
 
+  @action DeleteFolder(currentFolder: TreeNode) {
+    //need to delete item + all its children from nodeMap
+    //need to delete item from its parent's child array
+    //need to make sure item no longer as the selected node, maybe above will already sort it?
+  }
+
   @action createRandomId() {
     let charsForId = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let lengthOfId = 6;

@@ -23,7 +23,7 @@ export class FocusArea extends React.PureComponent<FocusAreaProps> {
           folderTitle = <FolderFocusArea appState={appState} />;
           break;
       }
-    } else if (!appState.selectedNode) {
+    } else {
       folderTitle = <div>Focus Area</div>;
     }
 

@@ -32,6 +32,19 @@ export class AppState {
     console.log(this.nodeMap);
   }
 
+  @action createSubFolder(currentFolder: TreeNode) {
+    const parentId = currentFolder.id;
+    let folderId = this.createRandomId();
+    const newSubFolder = new Folder(folderId, parentId, 'New Folder');
+
+    let parent = currentFolder as Folder;
+    parent.children.push(newSubFolder);
+    console.log(`${parent} now has a sub folder ${newSubFolder}`);
+
+    this.nodeMap.set(newSubFolder.id, newSubFolder);
+    console.log(this.nodeMap);
+  }
+
   @action createRandomId() {
     let charsForId = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let lengthOfId = 6;

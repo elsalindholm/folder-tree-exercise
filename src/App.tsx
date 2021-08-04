@@ -20,7 +20,7 @@ export class App extends React.PureComponent {
         </div>
         <div className={'focus-actions'}></div>
         <div className={'focus'}>
-          <FocusArea />
+          <FocusArea appState={this.appState} />
         </div>
       </div>
     );

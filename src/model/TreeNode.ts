@@ -6,7 +6,7 @@ export abstract class TreeNode {
   //id, parentId, label
   public id: string;
   public parentId: string;
-  public label: string;
+  @observable public label: string;
   public type: NodeType;
   @observable public selected: boolean;
 
@@ -32,5 +32,9 @@ export abstract class TreeNode {
 
   public isDoc(): this is Document {
     return this.type === NodeType.DOCUMENT;
+  }
+
+  public setLabel(newLabel: string) {
+    this.label = newLabel;
   }
 }

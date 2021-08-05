@@ -27,11 +27,15 @@ export class FocusArea extends React.PureComponent<FocusAreaProps> {
           break;
       }
     } else {
-      focusAreaContent = <div>Focus Area</div>;
+      focusAreaContent = (
+        <div className={'focus-area-empty'}>
+          <div>No folder / document selected.</div>
+        </div>
+      );
     }
 
     return (
-      <div className={'focus-area'}>
+      <div className={'focus-area-container'}>
         <div>
           {focusAreaContent}
           <div></div>

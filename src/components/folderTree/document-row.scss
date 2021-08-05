@@ -4,8 +4,6 @@
   min-width: 0;
   flex-shrink: 0;
 
-  border: 1px solid black;
-
   display: flex;
   flex-direction: row;
   justify-content: start;
@@ -33,7 +31,15 @@
     margin: 0 1%;
     flex-shrink: 0;
 
-    border: 1px solid red;
+    text-align: center;
+  }
+
+  .document-chevron {
+    height: 20px;
+    width: 20px;
+    margin: 0 1%;
+    flex-shrink: 0;
+
     text-align: center;
   }
 
@@ -46,7 +52,5 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
-    border: 1px solid red;
   }
 }

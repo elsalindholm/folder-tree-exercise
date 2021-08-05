@@ -2,7 +2,35 @@
   height: 100%;
   width: 100%;
 
-  border: 1px solid blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+  .app-title {
+    width: 95%;
+    height: 50px;
+    padding-top: 2%;
+
+    font-size: 30px;
+  }
+
+  .action-buttons-container {
+    width: 95%;
+    height: 50px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    label {
+      margin: 1%;
+    }
+    input {
+      margin: 1%;
+    }
+  }
 
   .add-folder-button {
     height: 25px;

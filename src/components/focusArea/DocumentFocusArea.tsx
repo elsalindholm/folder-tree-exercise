@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react';
 import React from 'react';
 
 import { AppState } from '../../state/AppState';
@@ -6,13 +7,17 @@ interface DocumentFocusAreaProps {
   appState: AppState;
 }
 
+@observer
 export class DocumentFocusArea extends React.PureComponent<DocumentFocusAreaProps> {
   render() {
     const { appState } = this.props;
 
     return (
-      <div>
-        <div>
+      <div className={'focus-area'}>
+        <div className={'focus-buttons'}>
+          <button>Delete Document</button>
+        </div>
+        <div className={'title-area'}>
           <label htmlFor={'document-title'}>Document Title:</label>
           <input
             type={'text'}
@@ -23,7 +28,6 @@ export class DocumentFocusArea extends React.PureComponent<DocumentFocusAreaProp
               appState.selectedNode.setLabel(event.target.value)
             }
           ></input>
-          <button>Delete Document</button>
         </div>
         <div>Document Content</div>
       </div>

@@ -23,7 +23,8 @@ export const DocumentRow: React.FC<DocumentProps> = observer(({ depth, document,
   return (
     <div className={'document-row ' + selectedDocument} onClick={() => onSelect()}>
       {spacer}
-      <div className={'document-symbol'}>D</div>
+      <div className={'document-chevron'}></div>
+
       <div className={'document-label'}>{document.label}</div>
     </div>
   );

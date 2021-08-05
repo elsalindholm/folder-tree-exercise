@@ -1,10 +1,8 @@
 .folder-row {
-  height: 30px;
-  width: 520px;
+  height: 5%;
+  width: 95%;
   min-width: 0;
   flex-shrink: 0;
-
-  border: 1px solid black;
 
   display: flex;
   flex-direction: row;
@@ -33,7 +31,6 @@
     margin: 0 1%;
     flex-shrink: 0;
 
-    border: 1px solid red;
     text-align: center;
   }
 
@@ -43,7 +40,6 @@
     margin: 0 1%;
     flex-shrink: 0;
 
-    border: 1px solid red;
     text-align: center;
   }
 
@@ -57,6 +53,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
 
-    border: 1px solid red;
+    border-bottom: 1px dotted black;
   }
 }

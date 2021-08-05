@@ -2,11 +2,11 @@ import { observer } from 'mobx-react';
 import React from 'react';
 
 import { TreeNode } from '../../model/treeNode';
-import { AppState, NodeType } from '../../state/AppState';
+import { AppState } from '../../state/AppState';
 import { FolderRow } from './FolderRow';
+import { DocumentRow } from './DocumentRow';
 
 import './folder-tree.scss';
-import { DocumentRow } from './DocumentRow';
 
 interface FolderTreeProps {
   appState: AppState;
@@ -30,26 +30,16 @@ export class FolderTree extends React.PureComponent<FolderTreeProps> {
     if (node.isFolder()) {
       // Render our folder row
       return (
-        <>
-          <FolderRow
-            depth={depth}
-            folder={node}
-            key={node.id}
-            onSelect={() => appState.onNodeSelect(node)}
-          />
+        <React.Fragment key={'frag-' + node.id}>
+          <FolderRow depth={depth} folder={node} onSelect={() => appState.onNodeSelect(node)} />
           {node.children.map((node) => this.renderNode(node, depth + 1))}
-        </>
+        </React.Fragment>
       );
     } else if (node.isDoc()) {
       return (
-        <>
-          <DocumentRow
-            depth={depth}
-            document={node}
-            key={node.id}
-            onSelect={() => appState.onNodeSelect(node)}
-          />
-        </>
+        <React.Fragment key={node.id}>
+          <DocumentRow depth={depth} document={node} onSelect={() => appState.onNodeSelect(node)} />
+        </React.Fragment>
       );
     } else {
       return null;

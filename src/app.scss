@@ -1,7 +1,10 @@
+@import './appStyles/app-styles.scss';
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: $roboto;
 }
 
 #app-root {
@@ -18,12 +21,11 @@
     'tree-actions focus-actions'
     'tree focus';
   grid-template-rows: minmax(0, 100px) minmax(0, auto);
-  grid-template-columns: minmax(0, 50%) minmax(0, 50%);
+  grid-template-columns: minmax(0, 40%) minmax(0, 60%);
 }
 
 .tree-actions {
   grid-area: tree-actions;
-  border-bottom: 1px solid black;
 }
 
 .focus-actions {

@@ -32,6 +32,8 @@ export class AppState {
 
     this.nodeMap.set(newFolder.id, newFolder);
     console.log(this.nodeMap);
+
+    this.onNodeSelect(newFolder);
   }
 
   @action createDocument(parentFolder: TreeNode) {
@@ -45,6 +47,8 @@ export class AppState {
     parent.children.push(newDocument);
 
     this.nodeMap.set(newDocument.id, newDocument);
+
+    this.onNodeSelect(newDocument);
   }
 
   @action DeleteFolder(currentFolder: TreeNode) {

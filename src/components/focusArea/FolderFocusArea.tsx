@@ -23,10 +23,9 @@ export class FolderFocusArea extends React.PureComponent<FolderFocusAreaProps> {
             appState.selectedNode.setLabel(event.target.value)
           }
         ></input>
-        <button onClick={() => appState.createSubFolder(appState.selectedNode)}>
-          + Sub Folder
-        </button>
-        <button>Delete</button>
+        <button onClick={() => appState.createFolder(appState.selectedNode)}>Add Sub Folder</button>
+        <button onClick={() => appState.createDocument(appState.selectedNode)}>Add Document</button>
+        <button>Delete Folder</button>
       </div>
     );
   }

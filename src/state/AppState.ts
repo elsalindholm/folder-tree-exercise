@@ -1,4 +1,5 @@
 import { action, observable } from 'mobx';
+import { Document } from '../model/Document';
 import { Folder } from '../model/Folder';
 import { TreeNode } from '../model/treeNode';
 
@@ -16,33 +17,34 @@ export class AppState {
     this.nodeMap.set(this.treeRoot.id, this.treeRoot);
   }
 
-  @action createRootFolder() {
-    const parentId = ''; // root folder parents have no id
+  @action createFolder(currentFolder?: TreeNode) {
+    const parentId = currentFolder ? currentFolder.id : '';
     let folderId = this.createRandomId();
-    const newRootFolder = new Folder(folderId, parentId, 'New Folder');
+
+    //folder requires id, parentId and label
+    const newFolder = new Folder(folderId, parentId, 'New Folder');
 
     const parent = this.nodeMap.get(parentId) as Folder;
 
     if (parent) {
-      parent.children.push(newRootFolder);
-      console.log(`${parent} is a parent of ${newRootFolder}`);
+      parent.children.push(newFolder);
     }
 
-    this.nodeMap.set(newRootFolder.id, newRootFolder);
+    this.nodeMap.set(newFolder.id, newFolder);
     console.log(this.nodeMap);
   }
 
-  @action createSubFolder(currentFolder: TreeNode) {
-    const parentId = currentFolder.id;
-    let folderId = this.createRandomId();
-    const newSubFolder = new Folder(folderId, parentId, 'New Folder');
+  @action createDocument(parentFolder: TreeNode) {
+    const parentId = parentFolder.id;
+    let documentId = this.createRandomId();
 
-    let parent = currentFolder as Folder;
-    parent.children.push(newSubFolder);
-    console.log(`${parent} now has a sub folder ${newSubFolder}`);
+    //document requires id, parentId and label
+    const newDocument = new Document(documentId, parentId, 'New Document');
 
-    this.nodeMap.set(newSubFolder.id, newSubFolder);
-    console.log(this.nodeMap);
+    const parent = this.nodeMap.get(parentId) as Folder;
+    parent.children.push(newDocument);
+
+    this.nodeMap.set(newDocument.id, newDocument);
   }
 
   @action DeleteFolder(currentFolder: TreeNode) {

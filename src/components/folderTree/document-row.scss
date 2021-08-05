@@ -1,4 +1,4 @@
-.folder-row {
+.document-row {
   height: 30px;
   width: 520px;
   min-width: 0;
@@ -21,23 +21,13 @@
     background-color: lightcoral;
   }
 
-  .folder-spacer {
+  .document-spacer {
     height: 20px;
     width: 20px;
     flex-shrink: 0;
   }
 
-  .folder-symbol {
-    height: 20px;
-    width: 20px;
-    margin: 0 1%;
-    flex-shrink: 0;
-
-    border: 1px solid red;
-    text-align: center;
-  }
-
-  .folder-chevron {
+  .document-symbol {
     height: 20px;
     width: 20px;
     margin: 0 1%;
@@ -47,7 +37,7 @@
     text-align: center;
   }
 
-  .folder-label {
+  .document-label {
     height: 20px;
     max-width: 400px;
     margin: 0 1%;

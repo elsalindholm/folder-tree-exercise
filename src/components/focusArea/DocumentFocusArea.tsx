@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react';
 import React from 'react';
-import { DocumentNode } from '../../model/Document';
+import { DocumentNode } from '../../model/DocumentNode';
 import { TreeNode } from '../../model/treeNode';
 
 import { AppState } from '../../state/AppState';

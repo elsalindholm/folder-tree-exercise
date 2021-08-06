@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { FolderNode } from '../../model/Folder';
+import { FolderNode } from '../../model/FolderNode';
 
 import './folder-row.scss';
 

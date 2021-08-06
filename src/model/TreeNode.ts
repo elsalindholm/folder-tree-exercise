@@ -1,7 +1,7 @@
 import { observable } from 'mobx';
 import { NodeType } from '../state/AppState';
-import { DocumentNode } from './Document';
-import { FolderNode } from './Folder';
+import { DocumentNode } from './DocumentNode';
+import { FolderNode } from './FolderNode';
 
 export abstract class TreeNode {
   //id, parentId, label

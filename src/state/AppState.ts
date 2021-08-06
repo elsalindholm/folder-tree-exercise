@@ -1,6 +1,6 @@
 import { action, observable } from 'mobx';
-import { DocumentNode } from '../model/Document';
-import { FolderNode } from '../model/Folder';
+import { DocumentNode } from '../model/DocumentNode';
+import { FolderNode } from '../model/FolderNode';
 import { TreeNode } from '../model/treeNode';
 
 export enum NodeType {

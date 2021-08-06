@@ -1,6 +1,7 @@
 import { observable } from 'mobx';
 import { NodeType } from '../state/AppState';
-import { Folder } from './Folder';
+import { DocumentNode } from './Document';
+import { FolderNode } from './Folder';
 
 export abstract class TreeNode {
   //id, parentId, label
@@ -26,11 +27,11 @@ export abstract class TreeNode {
     this.selected = false;
   }
 
-  public isFolder(): this is Folder {
+  public isFolder(): this is FolderNode {
     return this.type === NodeType.FOLDER;
   }
 
-  public isDoc(): this is Document {
+  public isDoc(): this is DocumentNode {
     return this.type === NodeType.DOCUMENT;
   }
 

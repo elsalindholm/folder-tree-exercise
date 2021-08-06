@@ -5,6 +5,7 @@ import { TreeNode } from '../../model/treeNode';
 import { AppState } from '../../state/AppState';
 import { FolderRow } from './FolderRow';
 import { DocumentRow } from './DocumentRow';
+import { DocumentNode } from '../../model/Document';
 
 import './folder-tree.scss';
 
@@ -41,8 +42,8 @@ export class FolderTree extends React.PureComponent<FolderTreeProps> {
           <DocumentRow depth={depth} document={node} onSelect={() => appState.onNodeSelect(node)} />
         </React.Fragment>
       );
-    } else {
-      return null;
     }
+
+    return null;
   }
 }

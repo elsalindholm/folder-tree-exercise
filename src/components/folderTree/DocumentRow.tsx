@@ -1,13 +1,13 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { Document } from '../../model/Document';
+import { DocumentNode } from '../../model/Document';
 
 import './document-row.scss';
 
 interface DocumentProps {
   depth: number;
-  document: Document;
+  document: DocumentNode;
   onSelect: () => void;
 }
 

@@ -1,7 +1,11 @@
 import { observer } from 'mobx-react';
 import React from 'react';
+import { DocumentNode } from '../../model/Document';
+import { TreeNode } from '../../model/treeNode';
 
 import { AppState } from '../../state/AppState';
+
+import './document-focus-area.scss';
 
 interface DocumentFocusAreaProps {
   appState: AppState;
@@ -11,6 +15,8 @@ interface DocumentFocusAreaProps {
 export class DocumentFocusArea extends React.PureComponent<DocumentFocusAreaProps> {
   render() {
     const { appState } = this.props;
+
+    const currentDocument = appState.selectedNode as DocumentNode;
 
     return (
       <div className={'focus-area'}>
@@ -29,7 +35,15 @@ export class DocumentFocusArea extends React.PureComponent<DocumentFocusAreaProp
             }
           ></input>
         </div>
-        <div>Document Content</div>
+
+        <textarea
+          id={'doc-text-area'}
+          name={'doc-text-area'}
+          value={currentDocument.content}
+          onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
+            currentDocument.setDocumentContent(event.target.value)
+          }
+        ></textarea>
       </div>
     );
   }

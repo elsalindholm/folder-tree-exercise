@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react';
 import React from 'react';
+import { DocumentNode } from '../../model/Document';
 
 import { AppState, NodeType } from '../../state/AppState';
 import { DocumentFocusArea } from './DocumentFocusArea';
@@ -34,13 +35,6 @@ export class FocusArea extends React.PureComponent<FocusAreaProps> {
       );
     }
 
-    return (
-      <div className={'focus-area-container'}>
-        <div>
-          {focusAreaContent}
-          <div></div>
-        </div>
-      </div>
-    );
+    return <div className={'focus-area-container'}>{focusAreaContent}</div>;
   }
 }

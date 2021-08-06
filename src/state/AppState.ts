@@ -1,6 +1,6 @@
 import { action, observable } from 'mobx';
-import { Document } from '../model/Document';
-import { Folder } from '../model/Folder';
+import { DocumentNode } from '../model/Document';
+import { FolderNode } from '../model/Folder';
 import { TreeNode } from '../model/treeNode';
 
 export enum NodeType {
@@ -9,7 +9,7 @@ export enum NodeType {
 }
 
 export class AppState {
-  @observable public treeRoot = new Folder('', '', '');
+  @observable public treeRoot = new FolderNode('', '', '');
   @observable public nodeMap = new Map<string, TreeNode>();
   @observable public selectedNode: TreeNode;
 
@@ -22,9 +22,9 @@ export class AppState {
     let folderId = this.createRandomId();
 
     //folder requires id, parentId and label
-    const newFolder = new Folder(folderId, parentId, 'New Folder');
+    const newFolder = new FolderNode(folderId, parentId, 'New Folder');
 
-    const parent = this.nodeMap.get(parentId) as Folder;
+    const parent = this.nodeMap.get(parentId) as FolderNode;
 
     if (parent) {
       parent.children.push(newFolder);
@@ -41,9 +41,9 @@ export class AppState {
     let documentId = this.createRandomId();
 
     //document requires id, parentId and label
-    const newDocument = new Document(documentId, parentId, 'New Document');
+    const newDocument = new DocumentNode(documentId, parentId, 'New Document');
 
-    const parent = this.nodeMap.get(parentId) as Folder;
+    const parent = this.nodeMap.get(parentId) as FolderNode;
     parent.children.push(newDocument);
 
     this.nodeMap.set(newDocument.id, newDocument);

@@ -1,13 +1,13 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 
-import { Folder } from '../../model/Folder';
+import { FolderNode } from '../../model/Folder';
 
 import './folder-row.scss';
 
 interface FolderProps {
   depth: number;
-  folder: Folder;
+  folder: FolderNode;
   onSelect: () => void;
 }
 

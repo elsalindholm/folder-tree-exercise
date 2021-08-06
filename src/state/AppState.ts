@@ -1,4 +1,5 @@
 import { action, observable } from 'mobx';
+
 import { DocumentNode } from '../model/DocumentNode';
 import { FolderNode } from '../model/FolderNode';
 import { TreeNode } from '../model/treeNode';
@@ -10,7 +11,7 @@ export enum NodeType {
 
 export class AppState {
   @observable public treeRoot = new FolderNode('', '', '');
-  @observable public nodeMap = new Map<string, TreeNode>();
+  public nodeMap = new Map<string, TreeNode>();
   @observable public selectedNode: TreeNode;
 
   constructor() {
@@ -51,10 +52,25 @@ export class AppState {
     this.onNodeSelect(newDocument);
   }
 
-  @action DeleteFolder(currentFolder: TreeNode) {
+  @action deleteNode(currentNode: TreeNode) {
     //need to delete item + all its children from nodeMap
+    this.deleteChildren(currentNode);
+
     //need to delete item from its parent's child array
-    //need to make sure item no longer as the selected node, maybe above will already sort it?
+    let parentFolder = this.nodeMap.get(currentNode.parentId) as FolderNode;
+
+    parentFolder.children = parentFolder.children.filter((child) => child.id !== currentNode.id);
+
+    //clear selectedNode variable
+    this.selectedNode = undefined;
+  }
+
+  deleteChildren(node: TreeNode) {
+    this.nodeMap.delete(node.id);
+
+    if (node.isFolder()) {
+      node.children.forEach((child) => this.deleteChildren(child));
+    }
   }
 
   @action createRandomId() {

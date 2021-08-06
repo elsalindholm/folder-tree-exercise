@@ -14,7 +14,7 @@ export class FolderTreeActions extends React.PureComponent<TreeActionProps> {
 
     return (
       <div className={'folder-tree-actions'}>
-        <div className={'app-title'}>Elsa's Folder Tree</div>
+        <div className={'app-title'}>Folder Tree</div>
         <div className={'action-buttons-container'}>
           <label htmlFor={'folder-tree-search'}>Search</label>
           <input type={'text'} id={'folder-tree-search'} name={'folder-tree-search'}></input>

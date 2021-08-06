@@ -21,7 +21,9 @@ export class DocumentFocusArea extends React.PureComponent<DocumentFocusAreaProp
     return (
       <div className={'focus-area'}>
         <div className={'focus-buttons'}>
-          <button>Delete Document</button>
+          <button onClick={() => appState.deleteNode(appState.selectedNode)}>
+            Delete Document
+          </button>
         </div>
         <div className={'title-area'}>
           <label htmlFor={'document-title'}>Document Title:</label>

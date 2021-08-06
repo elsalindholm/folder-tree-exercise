@@ -22,7 +22,7 @@ export class FolderFocusArea extends React.PureComponent<FolderFocusAreaProps> {
           <button onClick={() => appState.createDocument(appState.selectedNode)}>
             Add Document
           </button>
-          <button>Delete Folder</button>
+          <button onClick={() => appState.deleteNode(appState.selectedNode)}>Delete Folder</button>
         </div>
         <div className={'title-area'}>
           <label htmlFor={'folder-title'}>Title:</label>

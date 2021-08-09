@@ -26,6 +26,7 @@ export class AppState {
     const newFolder = new FolderNode(folderId, parentId, 'New Folder');
 
     const parent = this.nodeMap.get(parentId) as FolderNode;
+    parent.open = true;
 
     if (parent) {
       parent.children.push(newFolder);
@@ -45,6 +46,7 @@ export class AppState {
     const newDocument = new DocumentNode(documentId, parentId, 'New Document');
 
     const parent = this.nodeMap.get(parentId) as FolderNode;
+    parent.open = true;
     parent.children.push(newDocument);
 
     this.nodeMap.set(newDocument.id, newDocument);

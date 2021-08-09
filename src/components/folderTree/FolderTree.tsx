@@ -8,6 +8,7 @@ import { DocumentRow } from './DocumentRow';
 import { DocumentNode } from '../../model/DocumentNode';
 
 import './folder-tree.scss';
+import { FolderNode } from '../../model/FolderNode';
 
 interface FolderTreeProps {
   appState: AppState;
@@ -33,7 +34,7 @@ export class FolderTree extends React.PureComponent<FolderTreeProps> {
       return (
         <React.Fragment key={'frag-' + node.id}>
           <FolderRow depth={depth} folder={node} onSelect={() => appState.onNodeSelect(node)} />
-          {node.children.map((node) => this.renderNode(node, depth + 1))}
+          {node.open ? node.children.map((node) => this.renderNode(node, depth + 1)) : null}
         </React.Fragment>
       );
     } else if (node.isDoc()) {

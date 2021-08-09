@@ -99,4 +99,11 @@ export class AppState {
     this.selectedNode.select();
     console.log(`new selected ${this.selectedNode.id}`);
   }
+
+  @action searchNodeTree(input: string) {
+    console.log(input);
+
+    // we need to filter? through all folders and documents to see if any of their labels match the given string
+    // push search results into a different array/Map and render that? if yes, we need to make sure normal folder tree shows when the array has been cleared
+  }
 }

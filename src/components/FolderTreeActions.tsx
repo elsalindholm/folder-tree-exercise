@@ -1,23 +1,32 @@
 import { observer } from 'mobx-react';
 import React from 'react';
+import { AppState } from '../state/AppState';
 
 import './folder-tree-actions.scss';
 
 interface TreeActionProps {
   createRootFolder: () => void;
+  searchFolderTree: (input: string) => void;
 }
 
 @observer
 export class FolderTreeActions extends React.PureComponent<TreeActionProps> {
   render() {
-    const { createRootFolder } = this.props;
+    const { createRootFolder, searchFolderTree } = this.props;
 
     return (
       <div className={'folder-tree-actions'}>
         <div className={'app-title'}>Folder Tree</div>
         <div className={'action-buttons-container'}>
-          <label htmlFor={'folder-tree-search'}>Search</label>
-          <input type={'text'} id={'folder-tree-search'} name={'folder-tree-search'}></input>
+          <input
+            type={'search'}
+            id={'folder-tree-search'}
+            name={'folder-tree-search'}
+            placeholder={'Search...'}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              searchFolderTree(event.target.value)
+            }
+          ></input>
           <button className={'add-folder-button'} onClick={() => createRootFolder()}>
             +
           </button>

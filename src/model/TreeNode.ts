@@ -1,5 +1,5 @@
 import { observable } from 'mobx';
-import { NodeType } from '../state/AppState';
+import { AppState, NodeType } from '../state/AppState';
 import { DocumentNode } from './DocumentNode';
 import { FolderNode } from './FolderNode';
 

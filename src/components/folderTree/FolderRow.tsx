@@ -25,7 +25,7 @@ export const FolderRow: React.FC<FolderProps> = observer(({ depth, folder, onSel
     <div className={'folder-row ' + selectedFolder} onClick={() => onSelect()}>
       {spacer}
       <div className={'folder-chevron'} onClick={() => folder.toggleFolderChildren()}>
-        v
+        {folder.open ? '-' : 'v'}
       </div>
       <div className={'folder-label'}>{folder.label}</div>
     </div>

@@ -14,4 +14,8 @@ export class FolderNode extends TreeNode {
   @action public toggleFolderChildren() {
     this.open = this.open ? false : true;
   }
+
+  @action public sortChildren() {
+    this.children = this.children.sort();
+  }
 }

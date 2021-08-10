@@ -15,7 +15,7 @@ export class App extends React.PureComponent {
         <div className={'tree-actions'}>
           <FolderTreeActions
             createRootFolder={() => this.appState.createFolder()}
-            searchFolderTree={(input: string) => this.appState.searchNodeTree(input)}
+            searchFolderTree={(input: string) => this.appState.filterTree(input)}
           />
         </div>
         <div className={'tree'}>

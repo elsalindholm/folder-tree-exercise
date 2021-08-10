@@ -1,3 +1,4 @@
+import { timeStamp } from 'console';
 import { action, observable } from 'mobx';
 
 import { DocumentNode } from '../model/DocumentNode';
@@ -100,10 +101,36 @@ export class AppState {
     console.log(`new selected ${this.selectedNode.id}`);
   }
 
-  @action searchNodeTree(input: string) {
-    console.log(input);
+  @action filterTree(input: string) {
+    if (!input) {
+      this.clearFilter();
+      return;
+    }
 
-    // we need to filter? through all folders and documents to see if any of their labels match the given string
-    // push search results into a different array/Map and render that? if yes, we need to make sure normal folder tree shows when the array has been cleared
+    const inputLowerCase = input.toLowerCase();
+
+    this.nodeMap.forEach((node: TreeNode) => {
+      node.show = node.label.toLowerCase().includes(inputLowerCase);
+      if (node.show) {
+        this.showAncestors(node);
+      }
+    });
+  }
+
+  @action public clearFilter() {
+    this.nodeMap.forEach((node: TreeNode) => {
+      node.show = true;
+    });
+  }
+
+  //showancestor, takes a treenode, has to get parent, show and expand and call function again for parents parent
+  @action public showAncestors(node: TreeNode) {
+    if (node.parentId) {
+      const parent = this.nodeMap.get(node.parentId) as FolderNode;
+      parent.show = true;
+      parent.open = true;
+      this.showAncestors(parent);
+    }
+    return;
   }
 }

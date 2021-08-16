@@ -1,4 +1,3 @@
-import { timeStamp } from 'console';
 import { action, observable } from 'mobx';
 
 import { DocumentNode } from '../model/DocumentNode';
@@ -19,19 +18,18 @@ export class AppState {
     this.nodeMap.set(this.treeRoot.id, this.treeRoot);
   }
 
-  @action createFolder(currentFolder?: TreeNode) {
+  @action createFolder(currentFolder?: FolderNode) {
     const parentId = currentFolder ? currentFolder.id : '';
+    const parent = currentFolder ?? this.treeRoot;
     let folderId = this.createRandomId();
 
     //folder requires id, parentId and label
     const newFolder = new FolderNode(folderId, parentId, 'New Folder');
+    newFolder.setParent(parent);
 
-    const parent = this.nodeMap.get(parentId) as FolderNode;
     parent.open = true;
-
-    if (parent) {
-      parent.children.push(newFolder);
-    }
+    parent.children.push(newFolder);
+    parent.sortChildren();
 
     this.nodeMap.set(newFolder.id, newFolder);
     console.log(this.nodeMap);
@@ -45,6 +43,8 @@ export class AppState {
 
     //document requires id, parentId and label
     const newDocument = new DocumentNode(documentId, parentId, 'New Document');
+
+    newDocument.parent = parentFolder as FolderNode;
 
     const parent = this.nodeMap.get(parentId) as FolderNode;
     parent.open = true;

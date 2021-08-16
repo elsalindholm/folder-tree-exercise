@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react';
 import React from 'react';
-import { AppState } from '../state/AppState';
 
 import './folder-tree-actions.scss';
 

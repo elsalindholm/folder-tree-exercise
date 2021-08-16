@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react';
 import React from 'react';
+import { FolderNode } from '../../model/FolderNode';
 
 import { AppState } from '../../state/AppState';
 
@@ -16,7 +17,7 @@ export class FolderFocusArea extends React.PureComponent<FolderFocusAreaProps> {
     return (
       <div className={'focus-area'}>
         <div className={'focus-buttons'}>
-          <button onClick={() => appState.createFolder(appState.selectedNode)}>
+          <button onClick={() => appState.createFolder(appState.selectedNode as FolderNode)}>
             Add Sub Folder
           </button>
           <button onClick={() => appState.createDocument(appState.selectedNode)}>

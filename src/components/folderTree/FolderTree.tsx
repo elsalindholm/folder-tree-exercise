@@ -30,7 +30,7 @@ export class FolderTree extends React.PureComponent<FolderTreeProps> {
     if (node.isFolder() && node.show) {
       // Render our folder row
       return (
-        <React.Fragment key={'frag-' + node.id}>
+        <React.Fragment key={node.id}>
           <FolderRow depth={depth} folder={node} onSelect={() => appState.onNodeSelect(node)} />
           {node.open ? node.children.map((node) => this.renderNode(node, depth + 1)) : null}
         </React.Fragment>

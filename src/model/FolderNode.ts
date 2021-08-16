@@ -16,6 +16,6 @@ export class FolderNode extends TreeNode {
   }
 
   @action public sortChildren() {
-    this.children = this.children.sort();
+    this.children = this.children.slice().sort((a, b) => a.label.localeCompare(b.label));
   }
 }

@@ -27,9 +27,7 @@ export class AppState {
     const newFolder = new FolderNode(folderId, parentId, 'New Folder');
     newFolder.setParent(parent);
 
-    parent.open = true;
-    parent.children.push(newFolder);
-    parent.sortChildren();
+    this.addChild(newFolder, newFolder.parent);
 
     this.nodeMap.set(newFolder.id, newFolder);
     console.log(this.nodeMap);
@@ -43,16 +41,19 @@ export class AppState {
 
     //document requires id, parentId and label
     const newDocument = new DocumentNode(documentId, parentId, 'New Document');
+    newDocument.setParent(parentFolder as FolderNode);
 
-    newDocument.parent = parentFolder as FolderNode;
-
-    const parent = this.nodeMap.get(parentId) as FolderNode;
-    parent.open = true;
-    parent.children.push(newDocument);
+    this.addChild(newDocument, newDocument.parent);
 
     this.nodeMap.set(newDocument.id, newDocument);
 
     this.onNodeSelect(newDocument);
+  }
+
+  @action addChild(child: TreeNode, parent: FolderNode) {
+    parent.open = true;
+    parent.children.push(child);
+    parent.sortChildren();
   }
 
   @action deleteNode(currentNode: TreeNode) {

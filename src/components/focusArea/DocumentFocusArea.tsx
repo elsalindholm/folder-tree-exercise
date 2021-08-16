@@ -26,7 +26,7 @@ export class DocumentFocusArea extends React.PureComponent<DocumentFocusAreaProp
           </button>
         </div>
         <div className={'title-area'}>
-          <label htmlFor={'document-title'}>Document Title:</label>
+          <label htmlFor={'document-title'}>Title:</label>
           <input
             type={'text'}
             id={'document-title'}

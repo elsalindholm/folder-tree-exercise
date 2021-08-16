@@ -9,14 +9,14 @@
   justify-content: start;
   align-items: center;
 
-  background-color: white;
+  background-color: #333333;
 
   &:hover {
     background-color: lightblue;
   }
 
   &.selected {
-    background-color: lightcoral;
+    background-color: #7e7f9a;
   }
 
   .folder-spacer {
@@ -25,10 +25,9 @@
     flex-shrink: 0;
   }
 
-  .folder-symbol {
+  .folder-icon {
     height: 20px;
     width: 20px;
-    margin: 0 1%;
     flex-shrink: 0;
 
     text-align: center;
@@ -37,7 +36,7 @@
   .folder-chevron {
     height: 20px;
     width: 20px;
-    margin: 0 1%;
+
     flex-shrink: 0;
 
     text-align: center;
@@ -52,7 +51,5 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
-    border-bottom: 1px dotted black;
   }
 }

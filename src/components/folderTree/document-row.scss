@@ -9,7 +9,7 @@
   justify-content: start;
   align-items: center;
 
-  background-color: white;
+  background-color: #333333;
 
   &:hover {
     background-color: lightblue;
@@ -25,10 +25,10 @@
     flex-shrink: 0;
   }
 
-  .document-symbol {
+  .document-icon {
     height: 20px;
     width: 20px;
-    margin: 0 1%;
+
     flex-shrink: 0;
 
     text-align: center;

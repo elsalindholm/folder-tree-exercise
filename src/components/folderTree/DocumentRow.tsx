@@ -1,5 +1,7 @@
 import { observer } from 'mobx-react';
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFile } from '@fortawesome/free-solid-svg-icons';
 
 import { DocumentNode } from '../../model/DocumentNode';
 
@@ -24,7 +26,9 @@ export const DocumentRow: React.FC<DocumentProps> = observer(({ depth, document,
     <div className={'document-row ' + selectedDocument} onClick={() => onSelect()}>
       {spacer}
       <div className={'document-chevron'}></div>
-
+      <div className={'document-symbol'}>
+        <FontAwesomeIcon icon={faFile} color={'pink'} />
+      </div>
       <div className={'document-label'}>{document.label}</div>
     </div>
   );

@@ -2,6 +2,7 @@ import { action, observable } from 'mobx';
 import { NodeType } from '../state/AppState';
 import { DocumentNode } from './DocumentNode';
 import { FolderNode } from './FolderNode';
+import { StorageNode } from './StorageNode';
 
 export abstract class TreeNode {
   //id, parentId, label
@@ -45,4 +46,6 @@ export abstract class TreeNode {
   public isDoc(): this is DocumentNode {
     return this.type === NodeType.DOCUMENT;
   }
+
+  public abstract makeStorageNode(): StorageNode;
 }

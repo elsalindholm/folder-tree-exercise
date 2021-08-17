@@ -20,7 +20,7 @@ export class LineSymbol extends React.PureComponent {
             transform='translate(163 1502)'
             fill='none'
             stroke='#daddd8'
-            stroke-width='1'
+            strokeWidth='1'
           />
         </g>
       </svg>

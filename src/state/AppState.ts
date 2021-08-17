@@ -2,6 +2,7 @@ import { action, observable } from 'mobx';
 
 import { DocumentNode } from '../model/DocumentNode';
 import { FolderNode } from '../model/FolderNode';
+import { StorageNode } from '../model/StorageNode';
 import { TreeNode } from '../model/treeNode';
 
 export enum NodeType {
@@ -33,6 +34,7 @@ export class AppState {
     console.log(this.nodeMap);
 
     this.onNodeSelect(newFolder);
+    this.stringifyData();
   }
 
   @action createDocument(parentFolder: TreeNode) {
@@ -48,6 +50,20 @@ export class AppState {
     this.nodeMap.set(newDocument.id, newDocument);
 
     this.onNodeSelect(newDocument);
+    this.stringifyData();
+  }
+
+  @action createRandomId() {
+    let charsForId = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let lengthOfId = 6;
+    let randomId: string[] = [];
+
+    for (let i = 0; i < lengthOfId; i++) {
+      let index = Math.floor(Math.random() * (charsForId.length - 1));
+      randomId.push(charsForId[index]);
+    }
+    console.log(randomId);
+    return randomId.join('');
   }
 
   @action addChild(child: TreeNode, parent: FolderNode) {
@@ -75,19 +91,6 @@ export class AppState {
     if (node.isFolder()) {
       node.children.forEach((child) => this.deleteChildren(child));
     }
-  }
-
-  @action createRandomId() {
-    let charsForId = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let lengthOfId = 6;
-    let randomId: string[] = [];
-
-    for (let i = 0; i < lengthOfId; i++) {
-      let index = Math.floor(Math.random() * (charsForId.length - 1));
-      randomId.push(charsForId[index]);
-    }
-    console.log(randomId);
-    return randomId.join('');
   }
 
   @action onNodeSelect(node: TreeNode) {
@@ -133,5 +136,41 @@ export class AppState {
       this.showAncestors(parent);
     }
     return;
+  }
+
+  @action public stringifyData() {
+    const storageNodes: string[] = [];
+
+    this.nodeMap.forEach((node: TreeNode) => {
+      if (node.id) {
+        const sNode = node.makeStorageNode();
+        const stringified = JSON.stringify(sNode);
+        storageNodes.push(stringified);
+      }
+    });
+
+    const stringifiedArr = JSON.stringify(storageNodes);
+    console.log('set node str arr: ', stringifiedArr);
+
+    window.localStorage.setItem('nodes', stringifiedArr);
+
+    // In a different function on load:
+  }
+
+  @action public loadFolderTree() {
+    const strArr = window.localStorage.getItem('nodes');
+    const retrievedNodes: string[] = JSON.parse(strArr);
+    console.log('sNodes', retrievedNodes);
+    const storageNodes: Storage[] = [];
+
+    retrievedNodes.forEach((sNode: string) => {
+      const actualNode: StorageNode = JSON.parse(sNode);
+      console.log('actual Snode: ', actualNode);
+      storageNodes.push(actualNode);
+    });
+
+    //first we need to make storage nodes into folder and document nodes
+
+    //2nd we need to go over them again and add their parents and children
   }
 }

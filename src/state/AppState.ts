@@ -12,11 +12,12 @@ export enum NodeType {
 
 export class AppState {
   @observable public treeRoot = new FolderNode('', '', '');
-  public nodeMap = new Map<string, TreeNode>();
+  @observable public nodeMap = new Map<string, TreeNode>();
   @observable public selectedNode: TreeNode;
 
   constructor() {
     this.nodeMap.set(this.treeRoot.id, this.treeRoot);
+    this.loadFolderTree();
   }
 
   @action createFolder(currentFolder?: FolderNode) {
@@ -34,7 +35,7 @@ export class AppState {
     console.log(this.nodeMap);
 
     this.onNodeSelect(newFolder);
-    this.stringifyData();
+    this.saveData();
   }
 
   @action createDocument(parentFolder: TreeNode) {
@@ -50,7 +51,7 @@ export class AppState {
     this.nodeMap.set(newDocument.id, newDocument);
 
     this.onNodeSelect(newDocument);
-    this.stringifyData();
+    this.saveData();
   }
 
   @action createRandomId() {
@@ -83,6 +84,7 @@ export class AppState {
 
     //clear selectedNode variable
     this.selectedNode = undefined;
+    this.saveData();
   }
 
   deleteChildren(node: TreeNode) {
@@ -138,7 +140,7 @@ export class AppState {
     return;
   }
 
-  @action public stringifyData() {
+  @action public saveData() {
     const storageNodes: string[] = [];
 
     this.nodeMap.forEach((node: TreeNode) => {
@@ -158,19 +160,47 @@ export class AppState {
   }
 
   @action public loadFolderTree() {
+    // Retrieve stored nodes from local storage
     const strArr = window.localStorage.getItem('nodes');
+    if (!strArr.length) {
+      return;
+    }
+
     const retrievedNodes: string[] = JSON.parse(strArr);
     console.log('sNodes', retrievedNodes);
-    const storageNodes: Storage[] = [];
 
+    // Create storage nodes for each stored node
+    const storageNodes: StorageNode[] = [];
     retrievedNodes.forEach((sNode: string) => {
       const actualNode: StorageNode = JSON.parse(sNode);
       console.log('actual Snode: ', actualNode);
       storageNodes.push(actualNode);
     });
 
-    //first we need to make storage nodes into folder and document nodes
+    // Create real nodes from storage nodes
+    storageNodes.forEach((node: StorageNode) => {
+      if (node.type === NodeType.FOLDER) {
+        const newFolder = new FolderNode(node.id, node.parentId, node.label);
+        this.nodeMap.set(newFolder.id, newFolder);
+      } else if (node.type === NodeType.DOCUMENT) {
+        const newDocument = new DocumentNode(node.id, node.parentId, node.label);
+        newDocument.setDocumentContent(node.content);
+        this.nodeMap.set(newDocument.id, newDocument);
+      }
+    });
 
-    //2nd we need to go over them again and add their parents and children
+    // Assign parent/child refs to nodes
+    this.nodeMap.forEach((node) => {
+      if (!node.parentId) {
+        const parent = this.treeRoot;
+        node.setParent(parent);
+        this.addChild(node as TreeNode, parent);
+      } else {
+        const parent = this.nodeMap.get(node.parentId) as FolderNode;
+        node.setParent(parent);
+        this.addChild(node as TreeNode, parent);
+      }
+    });
+    this.saveData();
   }
 }

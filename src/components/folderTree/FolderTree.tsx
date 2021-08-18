@@ -27,7 +27,9 @@ export class FolderTree extends React.PureComponent<FolderTreeProps> {
   private renderNode(node: TreeNode, depth: number): JSX.Element {
     const { appState } = this.props;
 
-    if (node.isFolder() && node.show) {
+    if (node === appState.treeRoot) {
+      return null;
+    } else if (node.isFolder() && node.show) {
       // Render our folder row
       return (
         <React.Fragment key={node.id}>

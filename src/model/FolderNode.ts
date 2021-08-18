@@ -6,7 +6,6 @@ import { TreeNode } from './treeNode';
 
 export class FolderNode extends TreeNode {
   @observable public children: TreeNode[] = [];
-  @observable public childrenIds: string[] = [];
   @observable public open: boolean = false;
 
   constructor(id: string, parentId: string, label: string) {

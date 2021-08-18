@@ -35,7 +35,6 @@ export class AppState {
     console.log(this.nodeMap);
 
     this.onNodeSelect(newFolder);
-    this.saveData();
   }
 
   @action createDocument(parentFolder: TreeNode) {
@@ -51,7 +50,6 @@ export class AppState {
     this.nodeMap.set(newDocument.id, newDocument);
 
     this.onNodeSelect(newDocument);
-    this.saveData();
   }
 
   @action createRandomId() {
@@ -84,7 +82,6 @@ export class AppState {
 
     //clear selectedNode variable
     this.selectedNode = undefined;
-    this.saveData();
   }
 
   deleteChildren(node: TreeNode) {

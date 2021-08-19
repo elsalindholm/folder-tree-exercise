@@ -33,7 +33,7 @@ export class DocumentFocusArea extends React.PureComponent<DocumentFocusAreaProp
             name={'document-title'}
             value={appState.selectedNode.label}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              appState.selectedNode.setLabel(event.target.value)
+              appState.setNodeLabel(currentDocument, event.target.value)
             }
           ></input>
         </div>
@@ -43,7 +43,7 @@ export class DocumentFocusArea extends React.PureComponent<DocumentFocusAreaProp
           name={'doc-text-area'}
           value={currentDocument.content}
           onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
-            currentDocument.setDocumentContent(event.target.value)
+            appState.setDocumentContent(currentDocument, event.target.value)
           }
         ></textarea>
       </div>

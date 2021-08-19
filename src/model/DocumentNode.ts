@@ -11,7 +11,7 @@ export class DocumentNode extends TreeNode {
     super(NodeType.DOCUMENT, id, parentId, label);
   }
 
-  @action public setDocumentContent(content: string) {
+  @action public setContent(content: string) {
     this.content = content;
   }
 

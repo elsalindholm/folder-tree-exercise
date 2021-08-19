@@ -16,6 +16,9 @@ export class App extends React.PureComponent {
           <FolderTreeActions
             createRootFolder={() => this.appState.createFolder()}
             searchFolderTree={(input: string) => this.appState.filterTree(input)}
+            saveData={() => this.appState.saveData()}
+            clearData={() => this.appState.clearData()}
+            enableSave={this.appState.unsavedChanges ? true : false}
           />
         </div>
         <div className={'tree'}>

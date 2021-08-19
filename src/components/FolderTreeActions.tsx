@@ -6,12 +6,15 @@ import './folder-tree-actions.scss';
 interface TreeActionProps {
   createRootFolder: () => void;
   searchFolderTree: (input: string) => void;
+  saveData: () => void;
+  clearData: () => void;
+  enableSave: boolean;
 }
 
 @observer
 export class FolderTreeActions extends React.PureComponent<TreeActionProps> {
   render() {
-    const { createRootFolder, searchFolderTree } = this.props;
+    const { createRootFolder, searchFolderTree, saveData, clearData, enableSave } = this.props;
 
     return (
       <div className={'folder-tree-actions'}>
@@ -28,6 +31,12 @@ export class FolderTreeActions extends React.PureComponent<TreeActionProps> {
           ></input>
           <button className={'add-folder-button'} onClick={() => createRootFolder()}>
             +
+          </button>
+          <button className={'action-button'} onClick={() => saveData()} disabled={!enableSave}>
+            Save
+          </button>
+          <button className={'action-button'} onClick={() => clearData()}>
+            Clear
           </button>
         </div>
       </div>

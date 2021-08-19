@@ -14,6 +14,7 @@ export class AppState {
   @observable public treeRoot = new FolderNode('', '', '');
   @observable public nodeMap = new Map<string, TreeNode>();
   @observable public selectedNode: TreeNode;
+  @observable public unsavedChanges = false;
 
   constructor() {
     this.nodeMap.set(this.treeRoot.id, this.treeRoot);
@@ -35,6 +36,8 @@ export class AppState {
     console.log(this.nodeMap);
 
     this.onNodeSelect(newFolder);
+
+    this.unsavedChanges = true;
   }
 
   @action createDocument(parentFolder: TreeNode) {
@@ -50,6 +53,8 @@ export class AppState {
     this.nodeMap.set(newDocument.id, newDocument);
 
     this.onNodeSelect(newDocument);
+
+    this.unsavedChanges = true;
   }
 
   @action createRandomId() {
@@ -82,6 +87,8 @@ export class AppState {
 
     //clear selectedNode variable
     this.selectedNode = undefined;
+
+    this.unsavedChanges = true;
   }
 
   deleteChildren(node: TreeNode) {
@@ -90,6 +97,16 @@ export class AppState {
     if (node.isFolder()) {
       node.children.forEach((child) => this.deleteChildren(child));
     }
+  }
+
+  @action setNodeLabel(node: TreeNode, newLabel: string) {
+    node.setLabel(newLabel);
+    this.unsavedChanges = true;
+  }
+
+  @action setDocumentContent(node: DocumentNode, content: string) {
+    node.setContent(content);
+    this.unsavedChanges = true;
   }
 
   @action onNodeSelect(node: TreeNode) {
@@ -153,17 +170,27 @@ export class AppState {
 
     window.localStorage.setItem('nodes', stringifiedArr);
 
-    // In a different function on load:
+    this.unsavedChanges = false;
+  }
+
+  @action public clearData() {
+    localStorage.clear();
+    this.nodeMap.clear();
+    this.selectedNode = undefined;
+    //remake treeroot as a folder node
+    this.treeRoot = new FolderNode('', '', '');
+    //add tree root to the nodemap
+    this.nodeMap.set(this.treeRoot.id, this.treeRoot);
   }
 
   @action public loadFolderTree() {
     // Retrieve stored nodes from local storage
-    const strArr = window.localStorage.getItem('nodes');
-    if (!strArr.length) {
+    const retrievedStr = window.localStorage.getItem('nodes');
+    if (!retrievedStr) {
       return;
     }
 
-    const retrievedNodes: string[] = JSON.parse(strArr);
+    const retrievedNodes: string[] = JSON.parse(retrievedStr);
     console.log('sNodes', retrievedNodes);
 
     // Create storage nodes for each stored node
@@ -181,7 +208,7 @@ export class AppState {
         this.nodeMap.set(newFolder.id, newFolder);
       } else if (node.type === NodeType.DOCUMENT) {
         const newDocument = new DocumentNode(node.id, node.parentId, node.label);
-        newDocument.setDocumentContent(node.content);
+        newDocument.setContent(node.content);
         this.nodeMap.set(newDocument.id, newDocument);
       }
     });

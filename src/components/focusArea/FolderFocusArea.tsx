@@ -33,7 +33,7 @@ export class FolderFocusArea extends React.PureComponent<FolderFocusAreaProps> {
             name={'folder-title'}
             value={appState.selectedNode.label}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              appState.selectedNode.setLabel(event.target.value)
+              appState.setNodeLabel(appState.selectedNode, event.target.value)
             }
           ></input>
         </div>

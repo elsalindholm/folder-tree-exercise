@@ -27,7 +27,7 @@ export const DocumentRow: React.FC<DocumentProps> = observer(({ depth, document,
       {spacer}
       <div className={'document-chevron'}></div>
       <div className={'document-symbol'}>
-        <FontAwesomeIcon icon={faFile} color={'pink'} />
+        <FontAwesomeIcon icon={faFile} color={'white'} />
       </div>
       <div className={'document-label'}>{document.label}</div>
     </div>

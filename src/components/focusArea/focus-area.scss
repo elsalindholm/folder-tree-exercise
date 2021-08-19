@@ -1,3 +1,5 @@
+@import '../../appStyles/app-styles.scss';
+
 .focus-area-empty {
   height: 100%;
   width: 100%;
@@ -23,7 +25,7 @@
   justify-content: flex-start;
   align-items: center;
 
-  border: 3px solid black;
+  border: 3px solid $borders;
 
   .focus-buttons {
     width: 100%;
@@ -38,11 +40,13 @@
       margin: 1%;
       padding: 1%;
 
-      border-radius: 10px;
+      border-radius: 15px;
+      border: none;
 
-      background-color: #c47335;
-      color: #daddd8;
+      background-color: $buttons;
+      color: $dark-text;
       font-size: 14px;
+      font-weight: 500;
     }
   }
 
@@ -59,6 +63,7 @@
 
     input {
       margin: 1%;
+      padding: 0 1%;
       width: 70%;
       font-size: 22px;
     }

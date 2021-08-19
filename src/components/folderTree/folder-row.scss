@@ -1,3 +1,5 @@
+@import '../../appStyles/app-styles.scss';
+
 .folder-row {
   height: 5%;
   width: 100%;
@@ -9,14 +11,14 @@
   justify-content: start;
   align-items: center;
 
-  background-color: #333333;
+  background-color: $background;
 
   &:hover {
-    background-color: lightblue;
+    background-color: $row-hover;
   }
 
   &.selected {
-    background-color: #7e7f9a;
+    background-color: $row-selected;
   }
 
   .folder-spacer {

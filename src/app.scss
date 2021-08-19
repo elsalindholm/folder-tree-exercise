@@ -16,8 +16,8 @@
   height: 100%;
   width: 100%;
 
-  background-color: #333333;
-  color: #daddd8;
+  background-color: $background;
+  color: $light-text;
 
   display: grid;
   grid-template-areas:

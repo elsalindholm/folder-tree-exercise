@@ -1,3 +1,5 @@
+@import '../appStyles/app-styles.scss';
+
 .folder-tree-actions {
   height: 100%;
   width: 100%;
@@ -36,11 +38,19 @@
     height: 25px;
     width: 25px;
     margin: 0 15px 0 5px;
+    background-color: $buttons;
+    border: 2px solid $borders;
+    border-radius: 50%;
+    font-weight: 500;
   }
 
   .action-button {
     height: 25px;
-    padding: 0 5px;
+    padding: 0 10px;
     margin: 0 0 0 8px;
+    background-color: $buttons;
+    border: 2px solid $borders;
+    border-radius: 15px;
+    font-weight: 500;
   }
 }

@@ -1,9 +1,11 @@
+@import '../../appStyles/app-styles.scss';
+
 .folder-tree {
   height: 95%;
   width: 95%;
   margin: 0 0 0 auto;
 
-  border: 3px solid #7e7f9a;
+  border: 3px solid $borders;
 
   overflow-y: auto;
   overflow-x: hidden;
